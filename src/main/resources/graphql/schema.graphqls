@@ -1,0 +1,55 @@
+
+type Player {
+    id: ID!
+    name: String
+    team: Team
+    position: Position
+    points: Int
+    assists: Int
+    rebounds: Int
+}
+
+type Coach {
+    id: ID!
+    name: String
+    experience: Int
+    team: Team
+}
+
+
+enum Team {
+    CSK
+    PAO
+    CZV
+    PAOK
+}
+
+enum Position {
+    POINT_GUARD
+    SHOOTING_GUARD
+    SMALL_FORWARD
+    POWER_FORWARD
+    CENTER
+}
+
+type Query {
+    findAll: [Player]
+    findOne(id: ID): Player
+    findByTeam(team: Team): [Player]
+    findPlayersWithPointsAbove(threshold: Int!): [Player]
+    findByPosition(position: Position): [Player]
+    findCoachByTeam(team: Team): Coach
+    findAllCoaches: [Coach]
+
+
+}
+
+type Mutation {
+    create(name: String, team: Team, position: Position, points: Int!, assists: Int!, rebounds: Int!): Player
+    update(id: ID!, name: String!, team: Team!, position: Position!, points: Int!, assists: Int!, rebounds: Int!): Player
+    delete(id: ID!): Player
+    createCoach(name: String!, experience: Int!, team: Team): Coach
+    updateCoach(id: ID!, name: String, experience: Int, team: Team): Coach
+    deleteCoach(id: ID!): Coach
+}
+
